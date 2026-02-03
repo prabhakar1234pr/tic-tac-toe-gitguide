@@ -14,12 +14,14 @@
         }
 
         .cell {
+            width: 100px;
+            height: 100px;
             border: 1px solid #000;
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 100px;
-            height: 100px;
+            font-size: 32px;
+            cursor: pointer;
             box-sizing: border-box;
         }
 
@@ -28,7 +30,6 @@
             font-size: 18px;
         }
     </style>
-
 </head>
 <body>
 
@@ -45,6 +46,36 @@
     </div>
 
     <div id="message"></div>
+
+    <script>
+        let currentPlayer = "X";
+
+        const cells = document.querySelectorAll(".cell");
+        const message = document.getElementById("message");
+
+        message.textContent = `Current Player: ${currentPlayer}`;
+
+        function handleCellClick(event) {
+            const cell = event.target;
+
+            // Set cell content
+            cell.textContent = currentPlayer;
+
+            // Disable further clicks
+            cell.removeEventListener("click", handleCellClick);
+
+            // Switch player
+            currentPlayer = currentPlayer === "X" ? "O" : "X";
+
+            // Update message
+            message.textContent = `Current Player: ${currentPlayer}`;
+        }
+
+        // Add click listeners to all cells
+        cells.forEach(cell => {
+            cell.addEventListener("click", handleCellClick);
+        });
+    </script>
 
 </body>
 </html>
