@@ -5,12 +5,15 @@
     <title>Tic Tac Toe</title>
 
     <style>
-        #board {
+        #game-board {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             grid-template-rows: repeat(3, 1fr);
             width: 300px;
             height: 300px;
+            background-color: lightgray;
+            border: 5px solid gray;
+            margin: auto;
         }
 
         .cell {
@@ -28,12 +31,13 @@
         #message {
             margin-top: 20px;
             font-size: 18px;
+            text-align: center;
         }
     </style>
 </head>
 <body>
 
-    <div id="board">
+    <div id="game-board">
         <div class="cell"></div>
         <div class="cell"></div>
         <div class="cell"></div>
@@ -58,20 +62,13 @@
         function handleCellClick(event) {
             const cell = event.target;
 
-            // Set cell content
             cell.textContent = currentPlayer;
-
-            // Disable further clicks
             cell.removeEventListener("click", handleCellClick);
 
-            // Switch player
             currentPlayer = currentPlayer === "X" ? "O" : "X";
-
-            // Update message
             message.textContent = `Current Player: ${currentPlayer}`;
         }
 
-        // Add click listeners to all cells
         cells.forEach(cell => {
             cell.addEventListener("click", handleCellClick);
         });
